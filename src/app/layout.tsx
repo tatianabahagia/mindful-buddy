@@ -6,15 +6,9 @@ import './globals.css';
 import { Toaster } from "@/components/ui/toaster";
 import { APP_NAME } from '@/lib/constants';
 
-const geistSans = GeistSans({ 
-  variable: '--font-geist-sans',
-  subsets: ['latin'],
-});
-
-const geistMono = GeistMono({ 
-  variable: '--font-geist-mono',
-  subsets: ['latin'],
-});
+// Correct usage of GeistSans and GeistMono
+// The font objects themselves provide the necessary className and variable names
+// No need to call them as functions with subsets options here.
 
 export const metadata: Metadata = {
   title: APP_NAME,
@@ -28,7 +22,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${geistSans.variable} ${geistMono.variable} font-sans antialiased`}>
+      <body className={`${GeistSans.variable} ${GeistMono.variable} font-sans antialiased`}>
         {children}
         <Toaster />
       </body>
