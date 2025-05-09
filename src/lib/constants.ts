@@ -52,7 +52,7 @@ export const LANGUAGE_OPTIONS: SelectOption[] = [
   { value: "other", label: "Other", icon: Globe }, 
 ];
 
-export const DEFAULT_GREETING = `Hello! How are you feeling today? You can tell me your name, mood, or any conditions you're facing if you're comfortable. 🦄✨ I'm here to listen. You are the best person I ever had. 💖🚀🌟`;
+export const DEFAULT_GREETING = `Hello! How are you feeling today? You can tell me your name, mood, or any conditions you're facing if you're comfortable. 🦄✨ I'm here to listen. You are the best person I ever had. 💖🚀🌟 Please remember, our conversations are for support and are not end-to-end encrypted, so please avoid sharing highly sensitive personal information.`;
 
 export const ERROR_MESSAGE_AI = "Oh dear 😥, Bestfriend Buddy is feeling a bit under the weather and can't chat right now. Please try again in a little bit! We'll get through this together. ☀️💖🤗🌸🎉";
 
@@ -289,3 +289,5 @@ export const MOOD_ADVICE: Record<string, { title: string, advice: string[], icon
     icon: Lightbulb
   }
 };
+
+    
