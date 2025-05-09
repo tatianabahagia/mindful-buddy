@@ -1,3 +1,4 @@
+
 "use client";
 
 import React from 'react';
@@ -63,7 +64,7 @@ export function UserInputBar({
         <ScrollArea className="w-full whitespace-nowrap pb-2.5">
             <div className="flex w-max space-x-3 sm:space-x-4 mb-3">
                 <div className="space-y-1.5 min-w-[160px]">
-                  <Label htmlFor="userName" className="text-xs text-muted-foreground flex items-center"><User size={12} className="mr-1.5 text-primary"/> Your Name</Label>
+                  <Label htmlFor="userName" className="text-xs text-muted-foreground flex items-center"><User size={12} className="mr-1.5 text-primary"/> Yourname, dear?</Label>
                   <Input
                     id="userName"
                     type="text"
@@ -75,7 +76,7 @@ export function UserInputBar({
                   />
                 </div>
                 <div className="space-y-1.5 min-w-[160px]">
-                  <Label htmlFor="mood" className="text-xs text-muted-foreground flex items-center"><Sparkles size={12} className="mr-1.5 text-primary"/>Current Mood</Label>
+                  <Label htmlFor="mood" className="text-xs text-muted-foreground flex items-center"><Sparkles size={12} className="mr-1.5 text-primary"/>Yourmood, dear?</Label>
                   <Select value={mood} onValueChange={(value) => setMood(value === "none" ? undefined : value)}>
                     <SelectTrigger id="mood" className="h-9 text-sm shadow-sm" aria-label="Select Mood">
                       <SelectValue placeholder="How are you feeling?" />
@@ -89,7 +90,7 @@ export function UserInputBar({
                   </Select>
                 </div>
                 <div className="space-y-1.5 min-w-[190px]">
-                  <Label htmlFor="illness" className="text-xs text-muted-foreground flex items-center"><HeartPulse size={12} className="mr-1.5 text-primary"/>Condition (Optional)</Label>
+                  <Label htmlFor="illness" className="text-xs text-muted-foreground flex items-center"><HeartPulse size={12} className="mr-1.5 text-primary"/>Yourcondition, dear?</Label>
                   <Select value={illness} onValueChange={(value) => setIllness(value === "none" ? undefined : value)}>
                     <SelectTrigger id="illness" className="h-9 text-sm shadow-sm" aria-label="Select Condition">
                       <SelectValue placeholder="Share if you're comfortable" />
@@ -143,3 +144,4 @@ export function UserInputBar({
     </div>
   );
 }
+
