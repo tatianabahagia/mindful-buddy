@@ -3,6 +3,7 @@
 /**
  * @fileOverview This file defines a Genkit flow for generating supportive responses from an AI chatbot.
  * It includes a safety protocol to detect and respond to user input suggesting suicidal ideation.
+ * It also includes functionality to proactively offer general resources or coping strategies if a mood or illness is mentioned.
  *
  * - generateSupportiveResponse - A function that generates supportive responses based on user input.
  * - GenerateSupportiveResponseInput - The input type for the generateSupportiveResponse function.
@@ -21,7 +22,7 @@ const GenerateSupportiveResponseInputSchema = z.object({
 export type GenerateSupportiveResponseInput = z.infer<typeof GenerateSupportiveResponseInputSchema>;
 
 const GenerateSupportiveResponseOutputSchema = z.object({
-  response: z.string().describe('The AI chatbot response.'),
+  response: z.string().describe('The AI chatbot response, potentially including resource suggestions.'),
   isSuicidalRisk: z
     .boolean()
     .describe('Whether the user input suggests suicidal ideation or intent.'),
@@ -66,6 +67,15 @@ const prompt = ai.definePrompt({
   {% if mood %}The user is feeling {{mood}}. Acknowledge this mood with extra care and understanding.{% endif %}
   {% if illness %}The user is experiencing {{illness}}. Be particularly gentle and supportive regarding this.{% endif %}
 
+  **PROACTIVE SUPPORTIVE SUGGESTIONS (Only if NOT a suicidal risk situation):**
+  If the user has shared a mood or illness, and you think it's appropriate and helpful, you can gently include a very general suggestion for a type of resource or coping strategy *within* your supportive response.
+  For example:
+  - If mood is 'stressed': You might mention things like, "Sometimes when I feel stressed, a quick walk or listening to calming music helps me a bit. Maybe something like that could offer a tiny bit of peace for you too? 🎶"
+  - If illness is 'depression': You could say, "I know dealing with depression is incredibly challenging. Some people find journaling their thoughts helpful, or connecting with online communities like those on NAMI's website for shared experiences, if that feels right for you. You're not alone in this.🫂"
+  - If mood is 'anxious': Perhaps, "Anxiety can be so overwhelming. I've heard that simple grounding exercises can sometimes help. There are some great apps that guide you through them. Just a thought! ✨"
+  Make sure this is woven naturally into your friendly and empathetic message, and it's not the main focus. Always prioritize being a supportive friend. These are not professional advice, just friendly ideas.
+  The primary goal is to be supportive and understanding. Resource suggestions should feel like a caring friend sharing a thought, not a directive.
+
   User input: {{{userInput}}}
 
   Response:
@@ -89,3 +99,4 @@ const generateSupportiveResponseFlow = ai.defineFlow(
     };
   }
 );
+
