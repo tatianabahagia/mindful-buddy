@@ -39,6 +39,8 @@ export const LANGUAGE_OPTIONS: SelectOption[] = [
   { value: "en", label: "English", icon: Languages },
   { value: "es", label: "Español" }, // Spanish
   { value: "ar", label: "العربية (Arabic)" }, // Arabic
+  { value: "id", label: "Bahasa Indonesia" }, // Indonesian
+  { value: "jv", label: "Basa Jawa (Javanese)" }, // Javanese
   { value: "zh", label: "中文 (Mandarin)" }, // Chinese (Mandarin)
   { value: "hi", label: "हिन्दी (Hindi)" }, // Hindi
   { value: "ja", label: "日本語 (Japanese)" }, // Japanese
