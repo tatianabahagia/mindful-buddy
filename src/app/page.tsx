@@ -1,3 +1,4 @@
+
 "use client";
 
 import { useState, useEffect } from "react";
@@ -6,7 +7,12 @@ import { ChatDisplay, type Message as ChatMessageType } from "@/components/chat/
 import { UserInputBar } from "@/components/chat/UserInputBar";
 import { getAiResponseAction } from "./actions";
 import { useToast } from "@/hooks/use-toast";
-import { DEFAULT_GREETING, ERROR_MESSAGE_AI, AI_NAME } from "@/lib/constants";
+import { 
+  DEFAULT_GREETING, 
+  ERROR_MESSAGE_AI, 
+  AI_NAME,
+  EMERGENCY_SUICIDE_WARNING_TITLE,
+} from "@/lib/constants";
 import { v4 as uuidv4 } from 'uuid';
 
 export default function BestfriendBuddyPage() {
@@ -26,10 +32,10 @@ export default function BestfriendBuddyPage() {
     if (storedUserName) setUserName(storedUserName);
     
     const storedMood = localStorage.getItem("bestfriendBuddyMood");
-    if (storedMood && storedMood !== "none") setMood(storedMood); // Ensure "none" doesn't load as a mood
+    if (storedMood && storedMood !== "none") setMood(storedMood); 
 
     const storedIllness = localStorage.getItem("bestfriendBuddyIllness");
-    if (storedIllness && storedIllness !== "none") setIllness(storedIllness); // Ensure "none" doesn't load
+    if (storedIllness && storedIllness !== "none") setIllness(storedIllness); 
 
     const storedLanguage = localStorage.getItem("bestfriendBuddyLanguage");
     if (storedLanguage) setLanguage(storedLanguage);
@@ -48,7 +54,7 @@ export default function BestfriendBuddyPage() {
   // Save preferences to localStorage
   useEffect(() => {
     if (userName) localStorage.setItem("bestfriendBuddyUserName", userName);
-    else localStorage.removeItem("bestfriendBuddyUserName"); // Remove if empty
+    else localStorage.removeItem("bestfriendBuddyUserName"); 
   }, [userName]);
 
   useEffect(() => {
@@ -68,9 +74,8 @@ export default function BestfriendBuddyPage() {
 
   const handleSendMessage = async () => {
     const trimmedMessage = currentMessage.trim();
-    // Proceed if there's a message or if any preference has been meaningfully set
     if (!trimmedMessage && !userName && !mood && !illness) {
-        return; // Don't send if nothing is new
+        return; 
     }
 
     const userMessageContent = trimmedMessage || `(Shared an update to my profile)`;
@@ -86,13 +91,20 @@ export default function BestfriendBuddyPage() {
 
     try {
       const aiResponse = await getAiResponseAction({
-        // The AI prompt is designed to handle cases where userInput might be minimal if preferences are the main update.
         userInput: trimmedMessage || `My current details: Name: ${userName || 'not set'}, Mood: ${mood || 'not set'}, Condition: ${illness || 'not set'}. How are you, ${AI_NAME}?`,
         userName: userName || undefined,
         mood: mood || undefined,
         illness: illness || undefined,
-        // language is not directly used by the current AI prompt but collected for future use.
       });
+
+      if (aiResponse.isSuicidalRisk && aiResponse.emergencyContactInfo) {
+        toast({
+          variant: "destructive",
+          title: EMERGENCY_SUICIDE_WARNING_TITLE,
+          description: aiResponse.emergencyContactInfo,
+          duration: 30000, // Keep toast visible for longer
+        });
+      }
 
       const assistantMessage: ChatMessageType = {
         id: uuidv4(),

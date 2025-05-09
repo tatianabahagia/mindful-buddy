@@ -1,3 +1,4 @@
+
 "use server";
 
 import { 
@@ -19,6 +20,8 @@ export async function getAiResponseAction(
       illness: input.illness || undefined,
     };
     const response = await generateSupportiveResponse(sanitizedInput);
+    // The flow now returns { response: string, isSuicidalRisk: boolean, emergencyContactInfo?: string }
+    // This type should align with GenerateSupportiveResponseOutput already.
     return response;
   } catch (error) {
     console.error("Error getting AI response from action:", error);
