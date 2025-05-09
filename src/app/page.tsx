@@ -6,7 +6,8 @@ import { AppHeader } from "@/components/AppHeader";
 import { ChatDisplay, type Message as ChatMessageType } from "@/components/chat/ChatDisplay";
 import { UserInputBar } from "@/components/chat/UserInputBar";
 import { EducationalResourcesDialog } from "@/components/EducationalResourcesDialog";
-import { GuidedMeditationDialog } from "@/components/GuidedMeditationDialog"; // Added import
+import { GuidedMeditationDialog } from "@/components/GuidedMeditationDialog";
+import { MoodTrackingDialog } from "@/components/MoodTrackingDialog"; // Added import
 import { getAiResponseAction } from "./actions";
 import { useToast } from "@/hooks/use-toast";
 import { 
@@ -26,7 +27,8 @@ export default function BestfriendBuddyPage() {
   const [messages, setMessages] = useState<ChatMessageType[]>([]);
   const [isLoadingAiResponse, setIsLoadingAiResponse] = useState<boolean>(false);
   const [isEducationalResourcesOpen, setIsEducationalResourcesOpen] = useState<boolean>(false);
-  const [isGuidedMeditationOpen, setIsGuidedMeditationOpen] = useState<boolean>(false); // Added state
+  const [isGuidedMeditationOpen, setIsGuidedMeditationOpen] = useState<boolean>(false);
+  const [isMoodTrackingOpen, setIsMoodTrackingOpen] = useState<boolean>(false); // Added state
   
   const { toast } = useToast();
 
@@ -76,8 +78,12 @@ export default function BestfriendBuddyPage() {
     setIsEducationalResourcesOpen(prev => !prev);
   };
 
-  const handleToggleGuidedMeditationDialog = () => { // Added handler
+  const handleToggleGuidedMeditationDialog = () => {
     setIsGuidedMeditationOpen(prev => !prev);
+  };
+
+  const handleToggleMoodTrackingDialog = () => { // Added handler
+    setIsMoodTrackingOpen(prev => !prev);
   };
 
   const handleSendMessage = async () => {
@@ -148,7 +154,8 @@ export default function BestfriendBuddyPage() {
     <div className="flex flex-col h-screen bg-background text-foreground">
       <AppHeader 
         onToggleEducationalDialog={handleToggleEducationalDialog} 
-        onToggleGuidedMeditationDialog={handleToggleGuidedMeditationDialog} // Pass handler
+        onToggleGuidedMeditationDialog={handleToggleGuidedMeditationDialog}
+        onToggleMoodTrackingDialog={handleToggleMoodTrackingDialog} // Pass handler
       />
       <ChatDisplay messages={messages} userName={userName} isLoadingAiResponse={isLoadingAiResponse} />
       <UserInputBar
@@ -172,6 +179,10 @@ export default function BestfriendBuddyPage() {
       <GuidedMeditationDialog
         isOpen={isGuidedMeditationOpen}
         onOpenChange={setIsGuidedMeditationOpen}
+      />
+      <MoodTrackingDialog
+        isOpen={isMoodTrackingOpen}
+        onOpenChange={setIsMoodTrackingOpen}
       />
     </div>
   );

@@ -3,7 +3,7 @@ import type { LucideIcon } from 'lucide-react';
 import { 
   Smile, Frown, ShieldAlert, Wind as IconCalm, CloudCog as IconOverwhelmed, CloudRain as IconStressed,
   HeartCrack, Zap, History as IconPtsd, GitCompareArrows as IconBipolar, Clock as IconAdhd, CircleSlash, Brain,
-  Languages, Globe, BookOpen, Lightbulb, Bed, Users, Leaf, Headphones, PlayCircle, AlignLeft
+  Languages, Globe, BookOpen, Lightbulb, Bed, Users, Leaf, Headphones, PlayCircle, AlignLeft, ClipboardList
 } from 'lucide-react';
 
 export interface SelectOption {
@@ -200,3 +200,81 @@ export const GUIDED_MEDITATIONS: GuidedMeditationTopic[] = [
   }
 ];
 
+// Mood Tracking
+export const MOOD_TRACKING_ICON = ClipboardList;
+export const LOCAL_STORAGE_MOOD_ENTRIES_KEY = "bestfriendBuddyMoodEntries";
+
+export interface MoodEntry {
+  id: string;
+  timestamp: number;
+  mood: string; // From MOOD_OPTIONS value
+  notes?: string;
+}
+
+export const MOOD_ADVICE: Record<string, { title: string, advice: string[], icon?: LucideIcon }> = {
+  happy: {
+    title: "Embrace the Joy! 😊",
+    advice: [
+      "Share your happiness with someone you care about.",
+      "Take a moment to savor this feeling. What contributed to it?",
+      "Consider doing something you love to prolong this positive state."
+    ],
+    icon: Smile
+  },
+  sad: {
+    title: "It's Okay to Not Be Okay 💙",
+    advice: [
+      "Be gentle with yourself. Your feelings are valid.",
+      "Consider reaching out to a friend, family member, or Bestfriend Buddy to talk.",
+      "Engage in a comforting activity, like listening to music or watching a favorite movie."
+    ],
+    icon: Frown
+  },
+  anxious: {
+    title: "Finding Your Calm Center 🧘",
+    advice: [
+      "Try a simple breathing exercise: inhale for 4, hold for 4, exhale for 6.",
+      "Focus on your senses: What are 5 things you can see, 4 you can touch, 3 you can hear?",
+      "Remember that this feeling will pass. You are stronger than your anxiety."
+    ],
+    icon: ShieldAlert
+  },
+  calm: {
+    title: "Basking in Serenity ☀️",
+    advice: [
+      "Appreciate this moment of peace. What helps you feel calm?",
+      "Use this clarity to reflect or plan something positive.",
+      "Carry this feeling with you as you go about your day."
+    ],
+    icon: IconCalm
+  },
+  stressed: {
+    title: "Managing the Pressure 🌬️",
+    advice: [
+      "Identify one small thing you can do to alleviate some stress.",
+      "Take a short break to stretch, walk, or step away from the stressor.",
+      "Remind yourself that you can handle this. Break tasks into smaller steps."
+    ],
+    icon: IconStressed
+  },
+  overwhelmed: {
+    title: "One Step at a Time ☁️",
+    advice: [
+      "Focus on one task or thought at a time. It's okay to pause.",
+      "Write down what's on your mind to help organize your thoughts.",
+      "Don't hesitate to ask for help or delegate if possible."
+    ],
+    icon: IconOverwhelmed
+  },
+  general: {
+    title: "Reflection & Self-Care Tips ✨",
+    advice: [
+      "Tracking your mood helps you understand patterns and triggers.",
+      "Remember to be kind to yourself, no matter how you're feeling.",
+      "Consider activities that nourish your mind and body, like exercise, hobbies, or spending time in nature.",
+      "Connecting with others can provide support and perspective.",
+      "If you're consistently struggling, exploring educational resources or seeking professional guidance can be very helpful."
+    ],
+    icon: Lightbulb
+  }
+};
