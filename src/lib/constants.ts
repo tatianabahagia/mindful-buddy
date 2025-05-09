@@ -1,8 +1,8 @@
 import type { LucideIcon } from 'lucide-react';
 import { 
   Smile, Frown, ShieldAlert as IconAnxious, Wind as IconCalm, CloudCog as IconOverwhelmed, CloudRain as IconStressed,
-  HeartCrack, Zap, History as IconPtsd, GitCompareArrows as IconBipolar, Clock as IconAdhd, CircleSlash,
-  Languages, Brain
+  HeartCrack, Zap, History as IconPtsd, GitCompareArrows as IconBipolar, Clock as IconAdhd, CircleSlash, Brain,
+  Languages
 } from 'lucide-react';
 
 export interface SelectOption {
@@ -24,7 +24,7 @@ export const MOOD_OPTIONS: SelectOption[] = [
 ];
 
 export const ILLNESS_OPTIONS: SelectOption[] = [
-  { value: "none", label: "None", icon: CircleSlash },
+  { value: "none", label: "None (Select if not applicable)", icon: CircleSlash },
   { value: "depression", label: "Depression", icon: HeartCrack },
   { value: "anxiety_disorder", label: "Anxiety Disorder", icon: Zap },
   { value: "ptsd", label: "PTSD", icon: IconPtsd },
@@ -33,16 +33,20 @@ export const ILLNESS_OPTIONS: SelectOption[] = [
   { value: "other", label: "Other", icon: Brain },
 ];
 
-// For UI purposes, actual language support by AI model may vary.
+// APAC languages included as per request
 export const LANGUAGE_OPTIONS: SelectOption[] = [
   { value: "en", label: "English", icon: Languages },
-  { value: "es", label: "Español" }, // Example APAC-adjacent
-  { value: "zh", label: "中文 (Mandarin)" },
-  { value: "hi", label: "हिन्दी (Hindi)" },
-  { value: "ja", label: "日本語 (Japanese)" },
-  { value: "ko", label: "한국어 (Korean)" },
+  { value: "es", label: "Español" }, // Spanish
+  { value: "zh", label: "中文 (Mandarin)" }, // Chinese (Mandarin)
+  { value: "hi", label: "हिन्दी (Hindi)" }, // Hindi
+  { value: "ja", label: "日本語 (Japanese)" }, // Japanese
+  { value: "ko", label: "한국어 (Korean)" }, // Korean
+  { value: "ms", label: "Bahasa Melayu" }, // Malay
+  { value: "vi", label: "Tiếng Việt" }, // Vietnamese
+  { value: "th", label: "ภาษาไทย" }, // Thai
+  { value: "tl", label: "Tagalog" }, // Tagalog (Filipino)
 ];
 
-export const DEFAULT_GREETING = `Hello! I'm ${AI_NAME}, your supportive companion from ${APP_NAME}. How are you feeling today? You can tell me your name, mood, or any conditions you're facing if you're comfortable. 🦄✨`;
+export const DEFAULT_GREETING = `Hello! I'm ${AI_NAME}, your supportive companion from ${APP_NAME}. How are you feeling today? You can tell me your name, mood, or any conditions you're facing if you're comfortable. 🦄✨ I'm here to listen.`;
 
-export const ERROR_MESSAGE_AI = "Oh dear 😥, Bestfriend Buddy is feeling a bit under the weather and can't chat right now. Please try again in a little bit! ☀️";
+export const ERROR_MESSAGE_AI = "Oh dear 😥, Bestfriend Buddy is feeling a bit under the weather and can't chat right now. Please try again in a little bit! We'll get through this together. ☀️💖";

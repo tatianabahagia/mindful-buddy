@@ -1,18 +1,13 @@
 "use client";
 
-import { useState, useEffect, FormEvent } from "react";
+import { useState, useEffect } from "react";
 import { AppHeader } from "@/components/AppHeader";
 import { ChatDisplay, type Message as ChatMessageType } from "@/components/chat/ChatDisplay";
 import { UserInputBar } from "@/components/chat/UserInputBar";
 import { getAiResponseAction } from "./actions";
 import { useToast } from "@/hooks/use-toast";
-import { DEFAULT_GREETING, ERROR_MESSAGE_AI } from "@/lib/constants";
-import { v4 as uuidv4 } from 'uuid'; // For generating unique message IDs
-
-// Add this if not already present
-// npm install uuid
-// npm install @types/uuid --save-dev
-
+import { DEFAULT_GREETING, ERROR_MESSAGE_AI, AI_NAME } from "@/lib/constants";
+import { v4 as uuidv4 } from 'uuid';
 
 export default function MindfulBuddyPage() {
   const [userName, setUserName] = useState<string>("");
@@ -31,14 +26,15 @@ export default function MindfulBuddyPage() {
     if (storedUserName) setUserName(storedUserName);
     
     const storedMood = localStorage.getItem("mindfulBuddyMood");
-    if (storedMood) setMood(storedMood);
+    if (storedMood && storedMood !== "none") setMood(storedMood); // Ensure "none" doesn't load as a mood
 
     const storedIllness = localStorage.getItem("mindfulBuddyIllness");
-    if (storedIllness) setIllness(storedIllness);
+    if (storedIllness && storedIllness !== "none") setIllness(storedIllness); // Ensure "none" doesn't load
 
     const storedLanguage = localStorage.getItem("mindfulBuddyLanguage");
     if (storedLanguage) setLanguage(storedLanguage);
 
+    // Set initial greeting message
     setMessages([
       {
         id: uuidv4(),
@@ -52,15 +48,16 @@ export default function MindfulBuddyPage() {
   // Save preferences to localStorage
   useEffect(() => {
     if (userName) localStorage.setItem("mindfulBuddyUserName", userName);
+    else localStorage.removeItem("mindfulBuddyUserName"); // Remove if empty
   }, [userName]);
 
   useEffect(() => {
-    if (mood) localStorage.setItem("mindfulBuddyMood", mood);
+    if (mood && mood !== "none") localStorage.setItem("mindfulBuddyMood", mood);
     else localStorage.removeItem("mindfulBuddyMood");
   }, [mood]);
   
   useEffect(() => {
-    if (illness) localStorage.setItem("mindfulBuddyIllness", illness);
+    if (illness && illness !== "none") localStorage.setItem("mindfulBuddyIllness", illness);
     else localStorage.removeItem("mindfulBuddyIllness");
   }, [illness]);
 
@@ -71,16 +68,16 @@ export default function MindfulBuddyPage() {
 
   const handleSendMessage = async () => {
     const trimmedMessage = currentMessage.trim();
-    if (!trimmedMessage) {
-      // If only preferences changed, allow "sending" to update AI context (optional)
-      // For now, require a message. Could be changed to send on preference change too.
-      if(!userName && !mood && !illness) return;
+    // Proceed if there's a message or if any preference has been meaningfully set
+    if (!trimmedMessage && !userName && !mood && !illness) {
+        return; // Don't send if nothing is new
     }
 
+    const userMessageContent = trimmedMessage || `(Shared an update to my profile)`;
     const userMessage: ChatMessageType = {
       id: uuidv4(),
       role: "user",
-      content: trimmedMessage || "...", // Send "..." if only preferences were changed
+      content: userMessageContent,
       timestamp: new Date(),
     };
     setMessages((prevMessages) => [...prevMessages, userMessage]);
@@ -89,10 +86,12 @@ export default function MindfulBuddyPage() {
 
     try {
       const aiResponse = await getAiResponseAction({
-        userInput: trimmedMessage || `The user updated their information: Name: ${userName || 'not set'}, Mood: ${mood || 'not set'}, Condition: ${illness || 'not set'}. Please acknowledge or respond gently.`,
+        // The AI prompt is designed to handle cases where userInput might be minimal if preferences are the main update.
+        userInput: trimmedMessage || `My current details: Name: ${userName || 'not set'}, Mood: ${mood || 'not set'}, Condition: ${illness || 'not set'}. How are you, ${AI_NAME}?`,
         userName: userName || undefined,
         mood: mood || undefined,
         illness: illness || undefined,
+        // language is not directly used by the current AI prompt but collected for future use.
       });
 
       const assistantMessage: ChatMessageType = {
@@ -104,16 +103,19 @@ export default function MindfulBuddyPage() {
       setMessages((prevMessages) => [...prevMessages, assistantMessage]);
     } catch (error) {
       console.error("Failed to get AI response:", error);
-      const errorMessage = error instanceof Error ? error.message : ERROR_MESSAGE_AI;
+      const errorMessageContent = error instanceof Error && error.message !== ERROR_MESSAGE_AI 
+        ? `Something went a little sideways: ${error.message} But I'm still here for you! 🤗` 
+        : ERROR_MESSAGE_AI;
+      
       toast({
         variant: "destructive",
-        title: "Oh no! 🥺",
-        description: errorMessage,
+        title: "Oh no! 🥺 Something went wrong...",
+        description: errorMessageContent, 
       });
        const fallbackResponseMessage: ChatMessageType = {
         id: uuidv4(),
         role: "assistant",
-        content: "I'm having a little trouble connecting right now, but I'm still here for you. Could you try sending your message again in a moment? 🙏",
+        content: "I'm having a little trouble connecting right now, but I'm still here for you. Could you try sending your message again in a moment? 🙏 Your feelings are important to me. 💖",
         timestamp: new Date(),
       };
       setMessages((prevMessages) => [...prevMessages, fallbackResponseMessage]);
