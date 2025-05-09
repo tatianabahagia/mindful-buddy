@@ -52,10 +52,11 @@ export const LANGUAGE_OPTIONS: SelectOption[] = [
   { value: "other", label: "Other", icon: Globe }, 
 ];
 
-export const DEFAULT_GREETING = `Hello! How are you feeling today? You can tell me your name, mood, or any conditions you're facing if you're comfortable. 🦄✨ I'm here to listen.`;
+export const DEFAULT_GREETING = `Hello! How are you feeling today? You can tell me your name, mood, or any conditions you're facing if you're comfortable. 🦄✨ I'm here to listen. You are the best person I ever had.`;
 
 export const ERROR_MESSAGE_AI = "Oh dear 😥, Bestfriend Buddy is feeling a bit under the weather and can't chat right now. Please try again in a little bit! We'll get through this together. ☀️💖";
 
 export const EMERGENCY_SUICIDE_WARNING_TITLE = "Important: Please Seek Help 🙏";
 // The AI will provide the detailed emergency contact info. This constant is for the toast title.
 // Example of detailed message (handled by AI): "It sounds like you are going through a very difficult time. Please consider reaching out for help. You can contact the National Suicide Prevention Lifeline at 988 in the US and Canada, or call your local emergency number. You are not alone and help is available. ❤️"
+
