@@ -9,7 +9,7 @@ import { useToast } from "@/hooks/use-toast";
 import { DEFAULT_GREETING, ERROR_MESSAGE_AI, AI_NAME } from "@/lib/constants";
 import { v4 as uuidv4 } from 'uuid';
 
-export default function MindfulBuddyPage() {
+export default function BestfriendBuddyPage() {
   const [userName, setUserName] = useState<string>("");
   const [mood, setMood] = useState<string | undefined>(undefined);
   const [illness, setIllness] = useState<string | undefined>(undefined);
@@ -22,16 +22,16 @@ export default function MindfulBuddyPage() {
 
   useEffect(() => {
     // Load preferences from localStorage if available
-    const storedUserName = localStorage.getItem("mindfulBuddyUserName");
+    const storedUserName = localStorage.getItem("bestfriendBuddyUserName");
     if (storedUserName) setUserName(storedUserName);
     
-    const storedMood = localStorage.getItem("mindfulBuddyMood");
+    const storedMood = localStorage.getItem("bestfriendBuddyMood");
     if (storedMood && storedMood !== "none") setMood(storedMood); // Ensure "none" doesn't load as a mood
 
-    const storedIllness = localStorage.getItem("mindfulBuddyIllness");
+    const storedIllness = localStorage.getItem("bestfriendBuddyIllness");
     if (storedIllness && storedIllness !== "none") setIllness(storedIllness); // Ensure "none" doesn't load
 
-    const storedLanguage = localStorage.getItem("mindfulBuddyLanguage");
+    const storedLanguage = localStorage.getItem("bestfriendBuddyLanguage");
     if (storedLanguage) setLanguage(storedLanguage);
 
     // Set initial greeting message
@@ -47,22 +47,22 @@ export default function MindfulBuddyPage() {
 
   // Save preferences to localStorage
   useEffect(() => {
-    if (userName) localStorage.setItem("mindfulBuddyUserName", userName);
-    else localStorage.removeItem("mindfulBuddyUserName"); // Remove if empty
+    if (userName) localStorage.setItem("bestfriendBuddyUserName", userName);
+    else localStorage.removeItem("bestfriendBuddyUserName"); // Remove if empty
   }, [userName]);
 
   useEffect(() => {
-    if (mood && mood !== "none") localStorage.setItem("mindfulBuddyMood", mood);
-    else localStorage.removeItem("mindfulBuddyMood");
+    if (mood && mood !== "none") localStorage.setItem("bestfriendBuddyMood", mood);
+    else localStorage.removeItem("bestfriendBuddyMood");
   }, [mood]);
   
   useEffect(() => {
-    if (illness && illness !== "none") localStorage.setItem("mindfulBuddyIllness", illness);
-    else localStorage.removeItem("mindfulBuddyIllness");
+    if (illness && illness !== "none") localStorage.setItem("bestfriendBuddyIllness", illness);
+    else localStorage.removeItem("bestfriendBuddyIllness");
   }, [illness]);
 
   useEffect(() => {
-    localStorage.setItem("mindfulBuddyLanguage", language);
+    localStorage.setItem("bestfriendBuddyLanguage", language);
   }, [language]);
 
 

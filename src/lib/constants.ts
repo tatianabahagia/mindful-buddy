@@ -1,3 +1,4 @@
+
 import type { LucideIcon } from 'lucide-react';
 import { 
   Smile, Frown, ShieldAlert as IconAnxious, Wind as IconCalm, CloudCog as IconOverwhelmed, CloudRain as IconStressed,
@@ -11,7 +12,7 @@ export interface SelectOption {
   icon?: LucideIcon;
 }
 
-export const APP_NAME = "Mindful Buddy";
+export const APP_NAME = "Bestfriend Buddy";
 export const AI_NAME = "Bestfriend Buddy";
 
 export const MOOD_OPTIONS: SelectOption[] = [
@@ -52,3 +53,4 @@ export const LANGUAGE_OPTIONS: SelectOption[] = [
 export const DEFAULT_GREETING = `Hello! I'm ${AI_NAME}, your supportive companion from ${APP_NAME}. How are you feeling today? You can tell me your name, mood, or any conditions you're facing if you're comfortable. 🦄✨ I'm here to listen.`;
 
 export const ERROR_MESSAGE_AI = "Oh dear 😥, Bestfriend Buddy is feeling a bit under the weather and can't chat right now. Please try again in a little bit! We'll get through this together. ☀️💖";
+
