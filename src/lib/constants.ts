@@ -50,7 +50,7 @@ export const LANGUAGE_OPTIONS: SelectOption[] = [
   { value: "other", label: "Other", icon: Globe }, // Other language option
 ];
 
-export const DEFAULT_GREETING = `Hello! I'm ${AI_NAME}, your supportive companion from ${APP_NAME}. How are you feeling today? You can tell me your name, mood, or any conditions you're facing if you're comfortable. 🦄✨ I'm here to listen.`;
+export const DEFAULT_GREETING = `Hello! How are you feeling today? You can tell me your name, mood, or any conditions you're facing if you're comfortable. 🦄✨ I'm here to listen.`;
 
 export const ERROR_MESSAGE_AI = "Oh dear 😥, Bestfriend Buddy is feeling a bit under the weather and can't chat right now. Please try again in a little bit! We'll get through this together. ☀️💖";
 
