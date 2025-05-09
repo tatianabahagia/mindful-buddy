@@ -5,6 +5,7 @@ import { useState, useEffect } from "react";
 import { AppHeader } from "@/components/AppHeader";
 import { ChatDisplay, type Message as ChatMessageType } from "@/components/chat/ChatDisplay";
 import { UserInputBar } from "@/components/chat/UserInputBar";
+import { EducationalResourcesDialog } from "@/components/EducationalResourcesDialog"; // Added import
 import { getAiResponseAction } from "./actions";
 import { useToast } from "@/hooks/use-toast";
 import { 
@@ -19,15 +20,15 @@ export default function BestfriendBuddyPage() {
   const [userName, setUserName] = useState<string>("");
   const [mood, setMood] = useState<string | undefined>(undefined);
   const [illness, setIllness] = useState<string | undefined>(undefined);
-  const [language, setLanguage] = useState<string>("en"); // Default to English
+  const [language, setLanguage] = useState<string>("en");
   const [currentMessage, setCurrentMessage] = useState<string>("");
   const [messages, setMessages] = useState<ChatMessageType[]>([]);
   const [isLoadingAiResponse, setIsLoadingAiResponse] = useState<boolean>(false);
+  const [isEducationalResourcesOpen, setIsEducationalResourcesOpen] = useState<boolean>(false); // Added state
   
   const { toast } = useToast();
 
   useEffect(() => {
-    // Load preferences from localStorage if available
     const storedUserName = localStorage.getItem("bestfriendBuddyUserName");
     if (storedUserName) setUserName(storedUserName);
     
@@ -40,7 +41,6 @@ export default function BestfriendBuddyPage() {
     const storedLanguage = localStorage.getItem("bestfriendBuddyLanguage");
     if (storedLanguage) setLanguage(storedLanguage);
 
-    // Set initial greeting message
     setMessages([
       {
         id: uuidv4(),
@@ -51,7 +51,6 @@ export default function BestfriendBuddyPage() {
     ]);
   }, []);
 
-  // Save preferences to localStorage
   useEffect(() => {
     if (userName) localStorage.setItem("bestfriendBuddyUserName", userName);
     else localStorage.removeItem("bestfriendBuddyUserName"); 
@@ -71,6 +70,9 @@ export default function BestfriendBuddyPage() {
     localStorage.setItem("bestfriendBuddyLanguage", language);
   }, [language]);
 
+  const handleToggleEducationalDialog = () => {
+    setIsEducationalResourcesOpen(prev => !prev);
+  };
 
   const handleSendMessage = async () => {
     const trimmedMessage = currentMessage.trim();
@@ -102,7 +104,7 @@ export default function BestfriendBuddyPage() {
           variant: "destructive",
           title: EMERGENCY_SUICIDE_WARNING_TITLE,
           description: aiResponse.emergencyContactInfo,
-          duration: 30000, // Keep toast visible for longer
+          duration: 30000, 
         });
       }
 
@@ -138,7 +140,7 @@ export default function BestfriendBuddyPage() {
 
   return (
     <div className="flex flex-col h-screen bg-background text-foreground">
-      <AppHeader />
+      <AppHeader onToggleEducationalDialog={handleToggleEducationalDialog} />
       <ChatDisplay messages={messages} userName={userName} isLoadingAiResponse={isLoadingAiResponse} />
       <UserInputBar
         userName={userName}
@@ -153,6 +155,10 @@ export default function BestfriendBuddyPage() {
         setCurrentMessage={setCurrentMessage}
         onSendMessage={handleSendMessage}
         isLoading={isLoadingAiResponse}
+      />
+      <EducationalResourcesDialog 
+        isOpen={isEducationalResourcesOpen} 
+        onOpenChange={setIsEducationalResourcesOpen} 
       />
     </div>
   );
