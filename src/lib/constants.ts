@@ -1,7 +1,7 @@
 
 import type { LucideIcon } from 'lucide-react';
 import { 
-  Smile, Frown, ShieldAlert, Wind as IconCalm, CloudCog as IconOverwhelmed, CloudRain as IconStressed,
+  Smile, Frown, ShieldAlert, Wind as IconCalm, CloudCog as IconOverwhelmed, CloudRain as IconStressed, TrendingUp,
   HeartCrack, Zap, History as IconPtsd, GitCompareArrows as IconBipolar, Clock as IconAdhd, CircleSlash, Brain,
   Languages, Globe, BookOpen, Lightbulb, Bed, Users, Leaf, Headphones, PlayCircle, AlignLeft, ClipboardList
 } from 'lucide-react';
@@ -22,6 +22,7 @@ export const MOOD_OPTIONS: SelectOption[] = [
   { value: "calm", label: "Calm", icon: IconCalm },
   { value: "stressed", label: "Stressed", icon: IconStressed },
   { value: "overwhelmed", label: "Overwhelmed", icon: IconOverwhelmed },
+  { value: "manic", label: "Manic", icon: TrendingUp },
 ];
 
 export const ILLNESS_OPTIONS: SelectOption[] = [
@@ -51,9 +52,9 @@ export const LANGUAGE_OPTIONS: SelectOption[] = [
   { value: "other", label: "Other", icon: Globe }, 
 ];
 
-export const DEFAULT_GREETING = `Hello! How are you feeling today? You can tell me your name, mood, or any conditions you're facing if you're comfortable. 🦄✨ I'm here to listen. You are the best person I ever had.`;
+export const DEFAULT_GREETING = `Hello! How are you feeling today? You can tell me your name, mood, or any conditions you're facing if you're comfortable. 🦄✨ I'm here to listen. You are the best person I ever had. 💖🚀🌟`;
 
-export const ERROR_MESSAGE_AI = "Oh dear 😥, Bestfriend Buddy is feeling a bit under the weather and can't chat right now. Please try again in a little bit! We'll get through this together. ☀️💖";
+export const ERROR_MESSAGE_AI = "Oh dear 😥, Bestfriend Buddy is feeling a bit under the weather and can't chat right now. Please try again in a little bit! We'll get through this together. ☀️💖🤗🌸🎉";
 
 export const EMERGENCY_SUICIDE_WARNING_TITLE = "Important: Please Seek Help 🙏";
 
@@ -195,7 +196,7 @@ export const GUIDED_MEDITATIONS: GuidedMeditationTopic[] = [
       "Know that you can return to this peaceful place in your mind whenever you need to find a moment of calm.",
       "When you're ready to return, slowly begin to bring your awareness back to your physical surroundings.",
       "Take a few gentle breaths. Wiggle your fingers and toes.",
-      "And when you're ready, open your eyes, feeling refreshed and more at ease."
+      "And when you'reready, open your eyes, feeling refreshed and more at ease."
     ]
   }
 ];
@@ -265,6 +266,16 @@ export const MOOD_ADVICE: Record<string, { title: string, advice: string[], icon
       "Don't hesitate to ask for help or delegate if possible."
     ],
     icon: IconOverwhelmed
+  },
+  manic: {
+    title: "Channeling High Energy Safely 🚀",
+    advice: [
+        "It's wonderful you're feeling energetic! It's also important to ensure this energy is channeled in a healthy way.",
+        "Try to stick to a regular sleep schedule, even if you don't feel tired.",
+        "Engage in calming activities that you enjoy, like listening to soothing music or gentle stretching.",
+        "If this high energy feels overwhelming, difficult to control, or is leading to impulsive decisions, it's really important to speak with a doctor or mental health professional. They can help you manage these feelings safely."
+    ],
+    icon: TrendingUp
   },
   general: {
     title: "Reflection & Self-Care Tips ✨",
