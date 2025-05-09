@@ -7,7 +7,8 @@ import { ChatDisplay, type Message as ChatMessageType } from "@/components/chat/
 import { UserInputBar } from "@/components/chat/UserInputBar";
 import { EducationalResourcesDialog } from "@/components/EducationalResourcesDialog";
 import { GuidedMeditationDialog } from "@/components/GuidedMeditationDialog";
-import { MoodTrackingDialog } from "@/components/MoodTrackingDialog"; // Added import
+import { MoodTrackingDialog } from "@/components/MoodTrackingDialog";
+import { PrivacyDisclaimerDialog } from "@/components/PrivacyDisclaimerDialog"; // Added import
 import { getAiResponseAction } from "./actions";
 import { useToast } from "@/hooks/use-toast";
 import { 
@@ -15,6 +16,7 @@ import {
   ERROR_MESSAGE_AI, 
   AI_NAME,
   EMERGENCY_SUICIDE_WARNING_TITLE,
+  PRIVACY_DISCLAIMER_LOCAL_STORAGE_KEY,
 } from "@/lib/constants";
 import { v4 as uuidv4 } from 'uuid';
 
@@ -28,7 +30,8 @@ export default function BestfriendBuddyPage() {
   const [isLoadingAiResponse, setIsLoadingAiResponse] = useState<boolean>(false);
   const [isEducationalResourcesOpen, setIsEducationalResourcesOpen] = useState<boolean>(false);
   const [isGuidedMeditationOpen, setIsGuidedMeditationOpen] = useState<boolean>(false);
-  const [isMoodTrackingOpen, setIsMoodTrackingOpen] = useState<boolean>(false); // Added state
+  const [isMoodTrackingOpen, setIsMoodTrackingOpen] = useState<boolean>(false);
+  const [isPrivacyDisclaimerOpen, setIsPrivacyDisclaimerOpen] = useState<boolean>(false); // Added state
   
   const { toast } = useToast();
 
@@ -44,6 +47,11 @@ export default function BestfriendBuddyPage() {
 
     const storedLanguage = localStorage.getItem("bestfriendBuddyLanguage");
     if (storedLanguage) setLanguage(storedLanguage);
+
+    const disclaimerAcknowledged = localStorage.getItem(PRIVACY_DISCLAIMER_LOCAL_STORAGE_KEY);
+    if (disclaimerAcknowledged !== "true") {
+      setIsPrivacyDisclaimerOpen(true);
+    }
 
     setMessages([
       {
@@ -82,8 +90,15 @@ export default function BestfriendBuddyPage() {
     setIsGuidedMeditationOpen(prev => !prev);
   };
 
-  const handleToggleMoodTrackingDialog = () => { // Added handler
+  const handleToggleMoodTrackingDialog = () => {
     setIsMoodTrackingOpen(prev => !prev);
+  };
+
+  const handlePrivacyDisclaimerOpenChange = (isOpen: boolean) => {
+    if (!isOpen) { // When dialog is closed
+      localStorage.setItem(PRIVACY_DISCLAIMER_LOCAL_STORAGE_KEY, "true");
+    }
+    setIsPrivacyDisclaimerOpen(isOpen);
   };
 
   const handleSendMessage = async () => {
@@ -155,7 +170,7 @@ export default function BestfriendBuddyPage() {
       <AppHeader 
         onToggleEducationalDialog={handleToggleEducationalDialog} 
         onToggleGuidedMeditationDialog={handleToggleGuidedMeditationDialog}
-        onToggleMoodTrackingDialog={handleToggleMoodTrackingDialog} // Pass handler
+        onToggleMoodTrackingDialog={handleToggleMoodTrackingDialog}
       />
       <ChatDisplay messages={messages} userName={userName} isLoadingAiResponse={isLoadingAiResponse} />
       <UserInputBar
@@ -183,6 +198,10 @@ export default function BestfriendBuddyPage() {
       <MoodTrackingDialog
         isOpen={isMoodTrackingOpen}
         onOpenChange={setIsMoodTrackingOpen}
+      />
+      <PrivacyDisclaimerDialog
+        isOpen={isPrivacyDisclaimerOpen}
+        onOpenChange={handlePrivacyDisclaimerOpenChange}
       />
     </div>
   );

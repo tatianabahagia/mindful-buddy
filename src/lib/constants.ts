@@ -3,7 +3,7 @@ import type { LucideIcon } from 'lucide-react';
 import { 
   Smile, Frown, ShieldAlert, Wind as IconCalm, CloudCog as IconOverwhelmed, CloudRain as IconStressed, TrendingUp,
   HeartCrack, Zap, History as IconPtsd, GitCompareArrows as IconBipolar, Clock as IconAdhd, CircleSlash, Brain,
-  Languages, Globe, BookOpen, Lightbulb, Bed, Users, Leaf, Headphones, PlayCircle, AlignLeft, ClipboardList
+  Languages, Globe, BookOpen, Lightbulb, Bed, Users, Leaf, Headphones, PlayCircle, AlignLeft, ClipboardList, Info
 } from 'lucide-react';
 
 export interface SelectOption {
@@ -52,11 +52,17 @@ export const LANGUAGE_OPTIONS: SelectOption[] = [
   { value: "other", label: "Other", icon: Globe }, 
 ];
 
-export const DEFAULT_GREETING = `Hello! How are you feeling today? You can tell me your name, mood, or any conditions you're facing if you're comfortable. 🦄✨ I'm here to listen. You are the best person I ever had. 💖🚀🌟 Please remember, our conversations are for support and are not end-to-end encrypted, so please avoid sharing highly sensitive personal information.`;
+export const DEFAULT_GREETING = `Hello! How are you feeling today? You can tell me your name, mood, or any conditions you're facing if you're comfortable. 🦄✨ I'm here to listen. You are the best person I ever had. 💖🚀🌟`;
 
 export const ERROR_MESSAGE_AI = "Oh dear 😥, Bestfriend Buddy is feeling a bit under the weather and can't chat right now. Please try again in a little bit! We'll get through this together. ☀️💖🤗🌸🎉";
 
 export const EMERGENCY_SUICIDE_WARNING_TITLE = "Important: Please Seek Help 🙏";
+
+export const PRIVACY_DISCLAIMER_TITLE = "Important: About Our Conversations";
+export const PRIVACY_DISCLAIMER_MESSAGE = "Please remember, our conversations are for support and are not end-to-end encrypted, so please avoid sharing highly sensitive personal information.";
+export const PRIVACY_DISCLAIMER_ACKNOWLEDGE_BUTTON = "I Understand & Continue";
+export const PRIVACY_DISCLAIMER_LOCAL_STORAGE_KEY = "privacyDisclaimerAcknowledged";
+
 
 export interface EducationalTopic {
   id: string;
