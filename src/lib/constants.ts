@@ -3,7 +3,7 @@ import type { LucideIcon } from 'lucide-react';
 import { 
   Smile, Frown, ShieldAlert, Wind as IconCalm, CloudCog as IconOverwhelmed, CloudRain as IconStressed, TrendingUp,
   HeartCrack, Zap, History as IconPtsd, GitCompareArrows as IconBipolar, Clock as IconAdhd, CircleSlash, Brain,
-  Languages, Globe, BookOpen, Lightbulb, Bed, Users, Leaf, Headphones, PlayCircle, AlignLeft, ClipboardList, Info, ExternalLink
+  Languages, Globe, BookOpen, Lightbulb, Bed, Users, Leaf, Headphones, PlayCircle, AlignLeft, ClipboardList, Info, ExternalLink, Video
 } from 'lucide-react';
 
 export interface SelectOption {
@@ -84,7 +84,7 @@ export const EDUCATIONAL_CONTENT: EducationalTopic[] = [
     id: "understanding-anxiety",
     title: "Understanding Anxiety",
     icon: ShieldAlert,
-    videoUrl: PLACEHOLDER_VIDEO_MEDIUM,
+    videoUrl: PLACEHOLDER_VIDEO_MEDIUM, // A calming nature video can be suitable
     content: [
       "Anxiety is a natural human response to stress, involving feelings of fear or apprehension about what's to come. It's okay to feel anxious sometimes.",
       "Common symptoms can include: feeling nervous, restless, or tense; having an increased heart rate; rapid breathing; sweating; trembling; difficulty concentrating; and trouble sleeping.",
@@ -97,7 +97,7 @@ export const EDUCATIONAL_CONTENT: EducationalTopic[] = [
     id: "coping-with-stress",
     title: "Coping with Stress",
     icon: Lightbulb, 
-    videoUrl: PLACEHOLDER_VIDEO_SHORT,
+    videoUrl: PLACEHOLDER_VIDEO_SHORT, // A short, simple video for a quick break concept
     content: [
       "Stress is a part of life, but chronic stress can impact your well-being. Identifying your stressors is the first step to managing them.",
       "Deep breathing exercises can be very effective. Try inhaling slowly through your nose, holding for a few seconds, and exhaling slowly through your mouth. Repeat several times.",
@@ -110,7 +110,7 @@ export const EDUCATIONAL_CONTENT: EducationalTopic[] = [
     id: "importance-of-sleep",
     title: "The Value of Sleep for Mental Health",
     icon: Bed,
-    videoUrl: PLACEHOLDER_VIDEO_MEDIUM,
+    videoUrl: PLACEHOLDER_VIDEO_MEDIUM, // A peaceful, calming video
     content: [
       "Quality sleep is crucial for mental and emotional health. During sleep, your brain works to process emotions and memories, and a lack of sleep can affect your mood and resilience.",
       "Tips for better sleep: Try to maintain a consistent sleep schedule, create a relaxing bedtime routine, make sure your bedroom is dark and quiet, and avoid caffeine or heavy meals close to bedtime.",
@@ -123,7 +123,7 @@ export const EDUCATIONAL_CONTENT: EducationalTopic[] = [
     id: "mindfulness-basics",
     title: "Mindfulness Basics",
     icon: Leaf,
-    videoUrl: PLACEHOLDER_VIDEO_LONG,
+    videoUrl: PLACEHOLDER_VIDEO_LONG, // A longer video for a mindfulness practice
     content: [
       "Mindfulness is the practice of paying attention to the present moment without judgment. It can help reduce stress and increase self-awareness.",
       "A simple mindfulness exercise: Sit comfortably, close your eyes if you wish, and focus on your breath. Notice the sensation of air entering and leaving your body. If your mind wanders, gently bring your attention back to your breath.",
@@ -136,7 +136,7 @@ export const EDUCATIONAL_CONTENT: EducationalTopic[] = [
     id: "seeking-professional-help",
     title: "When to Seek Professional Help",
     icon: Users,
-    videoUrl: PLACEHOLDER_VIDEO_SHORT,
+    videoUrl: PLACEHOLDER_VIDEO_SHORT, // A neutral, informative video
     content: [
       "While self-help strategies are valuable, sometimes professional support is needed. It's a sign of strength to seek help when you need it.",
       "Consider reaching out if: your feelings are intense and overwhelming, your symptoms are persistent and interfere with daily life, you're struggling to cope, or you have thoughts of harming yourself or others.",
@@ -162,7 +162,7 @@ export const GUIDED_MEDITATIONS: GuidedMeditationTopic[] = [
     title: "Breathing Meditation (5 Min)",
     icon: PlayCircle,
     description: "A short meditation to center yourself by focusing on your breath.",
-    videoUrl: PLACEHOLDER_VIDEO_SHORT, // Short video for 5 min meditation
+    videoUrl: PLACEHOLDER_VIDEO_SHORT, 
     script: [
       "Find a comfortable position, either sitting or lying down.",
       "Gently close your eyes, or soften your gaze if you prefer.",
@@ -184,7 +184,7 @@ export const GUIDED_MEDITATIONS: GuidedMeditationTopic[] = [
     title: "Body Scan Meditation (10 Min)",
     icon: PlayCircle,
     description: "A longer meditation to cultivate awareness of bodily sensations.",
-    videoUrl: PLACEHOLDER_VIDEO_MEDIUM, // Medium video for 10 min meditation
+    videoUrl: PLACEHOLDER_VIDEO_MEDIUM, 
     script: [
       "Begin by finding a comfortable position, ideally lying down on your back, or sitting if that's more comfortable for you. Let your arms rest by your sides, palms facing up or down.",
       "Allow your eyes to gently close, or maintain a soft, unfocused gaze.",
@@ -214,7 +214,7 @@ export const GUIDED_MEDITATIONS: GuidedMeditationTopic[] = [
     title: "Stress Relief Visualization (7 Min)",
     icon: PlayCircle,
     description: "Visualize a calming scene to release stress and tension.",
-    videoUrl: PLACEHOLDER_VIDEO_LONG, // Longer video for 7 min visualization
+    videoUrl: PLACEHOLDER_VIDEO_LONG, // Using longer video as it's a 7 min visualization
     script: [
       "Settle into a comfortable and quiet space where you won't be disturbed.",
       "Close your eyes gently and take three slow, deep breaths. With each exhale, imagine releasing any tension you're holding.",
@@ -322,5 +322,3 @@ export const MOOD_ADVICE: Record<string, { title: string, advice: string[], icon
     icon: Lightbulb
   }
 };
-
-    

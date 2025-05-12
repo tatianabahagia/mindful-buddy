@@ -16,7 +16,7 @@ import {
 } from "@/components/ui/accordion";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { EDUCATIONAL_CONTENT, type EducationalTopic } from "@/lib/constants";
-import { BookOpen, ExternalLink, PlayCircle } from "lucide-react";
+import { BookOpen, ExternalLink, Video } from "lucide-react"; // Changed PlayCircle to Video
 import { Button } from "@/components/ui/button";
 
 interface EducationalResourcesDialogProps {
@@ -33,7 +33,7 @@ export function EducationalResourcesDialog({
       <DialogContent className="sm:max-w-[600px] max-h-[80vh] flex flex-col">
         <DialogHeader className="p-6 pb-4">
           <DialogTitle className="flex items-center text-2xl">
-            <BookOpen className="mr-3 h-7 w-7 text-primary" />
+            <Video className="mr-3 h-7 w-7 text-primary" /> {/* Changed BookOpen to Video */}
             Educational Resources
           </DialogTitle>
           <DialogDescription className="pt-1">
@@ -53,7 +53,15 @@ export function EducationalResourcesDialog({
                 </AccordionTrigger>
                 <AccordionContent className="text-sm text-muted-foreground leading-relaxed">
                   {topic.videoUrl && (
-                    <div className="my-4 rounded-md overflow-hidden shadow-lg" data-ai-hint="education learning">
+                    <div className="my-4 rounded-md overflow-hidden shadow-lg" 
+                         data-ai-hint={
+                            topic.id === "understanding-anxiety" ? "calm nature" :
+                            topic.id === "coping-with-stress" ? "relaxation technique" :
+                            topic.id === "importance-of-sleep" ? "peaceful night" :
+                            topic.id === "mindfulness-basics" ? "serene meditation" :
+                            topic.id === "seeking-professional-help" ? "supportive discussion" :
+                            "education learning" // Default hint
+                         }>
                        <video
                         key={topic.videoUrl}
                         className="w-full aspect-video"
@@ -89,7 +97,7 @@ export function EducationalResourcesDialog({
           </Accordion>
           {EDUCATIONAL_CONTENT.length === 0 && (
             <div className="text-center py-10 text-muted-foreground">
-              <PlayCircle className="mx-auto h-12 w-12 text-primary/50 mb-2" />
+              <Video className="mx-auto h-12 w-12 text-primary/50 mb-2" /> {/* Changed PlayCircle to Video */}
               <p className="text-lg font-medium">Educational Content Coming Soon!</p>
               <p className="text-sm">We're working on bringing you helpful videos and resources.</p>
             </div>
