@@ -134,13 +134,16 @@ export interface GuidedMeditationTopic {
   audioUrl?: string;
 }
 
+// Generic placeholder video URL
+const PLACEHOLDER_VIDEO_URL = "https://www.w3schools.com/html/mov_bbb.mp4";
+
 export const GUIDED_MEDITATIONS: GuidedMeditationTopic[] = [
   {
     id: "breathing-meditation",
     title: "Breathing Meditation (5 Min)",
     icon: PlayCircle,
     description: "A short meditation to center yourself by focusing on your breath.",
-    // Placeholder audio - replace with actual URL
+    videoUrl: PLACEHOLDER_VIDEO_URL, 
     audioUrl: "/audio/breathing-meditation.mp3", 
     script: [
       "Find a comfortable position, either sitting or lying down.",
@@ -163,8 +166,7 @@ export const GUIDED_MEDITATIONS: GuidedMeditationTopic[] = [
     title: "Body Scan Meditation (10 Min)",
     icon: PlayCircle,
     description: "A longer meditation to cultivate awareness of bodily sensations.",
-    // Example video - replace with actual URL
-    videoUrl: "https://www.w3schools.com/html/mov_bbb.mp4", 
+    videoUrl: PLACEHOLDER_VIDEO_URL, // Already had a video, can keep or use placeholder
     script: [
       "Begin by finding a comfortable position, ideally lying down on your back, or sitting if that's more comfortable for you. Let your arms rest by your sides, palms facing up or down.",
       "Allow your eyes to gently close, or maintain a soft, unfocused gaze.",
@@ -194,7 +196,8 @@ export const GUIDED_MEDITATIONS: GuidedMeditationTopic[] = [
     title: "Stress Relief Visualization (7 Min)",
     icon: PlayCircle,
     description: "Visualize a calming scene to release stress and tension.",
-    audioUrl: "/audio/stress-relief-visualization.mp3", // Placeholder audio
+    videoUrl: PLACEHOLDER_VIDEO_URL,
+    audioUrl: "/audio/stress-relief-visualization.mp3", 
     script: [
       "Settle into a comfortable and quiet space where you won't be disturbed.",
       "Close your eyes gently and take three slow, deep breaths. With each exhale, imagine releasing any tension you're holding.",
