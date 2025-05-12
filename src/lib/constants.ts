@@ -3,7 +3,7 @@ import type { LucideIcon } from 'lucide-react';
 import { 
   Smile, Frown, ShieldAlert, Wind as IconCalm, CloudCog as IconOverwhelmed, CloudRain as IconStressed, TrendingUp,
   HeartCrack, Zap, History as IconPtsd, GitCompareArrows as IconBipolar, Clock as IconAdhd, CircleSlash, Brain,
-  Languages, Globe, BookOpen, Lightbulb, Bed, Users, Leaf, Headphones, PlayCircle, AlignLeft, ClipboardList, Info
+  Languages, Globe, BookOpen, Lightbulb, Bed, Users, Leaf, Headphones, PlayCircle, AlignLeft, ClipboardList, Info, ExternalLink
 } from 'lucide-react';
 
 export interface SelectOption {
@@ -69,58 +69,81 @@ export interface EducationalTopic {
   title: string;
   icon?: LucideIcon;
   content: string[];
+  videoUrl?: string;
+  externalLink?: string;
+  externalLinkText?: string;
 }
+
+// Generic placeholder video URL. 
+const PLACEHOLDER_VIDEO_SHORT = "https://www.w3schools.com/html/mov_bbb.mp4"; // Approx 5 seconds
+const PLACEHOLDER_VIDEO_MEDIUM = "https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4"; // Approx 11 seconds
+const PLACEHOLDER_VIDEO_LONG = "https://jsoncompare.org/LearningContainer/SampleFiles/Video/MP4/Sample-MP4-Video-File-for-Testing.mp4"; // Approx 30 seconds
 
 export const EDUCATIONAL_CONTENT: EducationalTopic[] = [
   {
     id: "understanding-anxiety",
     title: "Understanding Anxiety",
     icon: ShieldAlert,
+    videoUrl: PLACEHOLDER_VIDEO_MEDIUM,
     content: [
       "Anxiety is a natural human response to stress, involving feelings of fear or apprehension about what's to come. It's okay to feel anxious sometimes.",
       "Common symptoms can include: feeling nervous, restless, or tense; having an increased heart rate; rapid breathing; sweating; trembling; difficulty concentrating; and trouble sleeping.",
       "A simple grounding technique like the 5-4-3-2-1 method can be helpful: Acknowledge 5 things you see, 4 things you can touch, 3 things you hear, 2 things you can smell, and 1 thing you can taste. This can help bring your focus to the present moment."
-    ]
+    ],
+    externalLink: "https://www.nami.org/About-Mental-Illness/Mental-Health-Conditions/Anxiety-Disorders",
+    externalLinkText: "Learn more about Anxiety Disorders on NAMI"
   },
   {
     id: "coping-with-stress",
     title: "Coping with Stress",
     icon: Lightbulb, 
+    videoUrl: PLACEHOLDER_VIDEO_SHORT,
     content: [
       "Stress is a part of life, but chronic stress can impact your well-being. Identifying your stressors is the first step to managing them.",
       "Deep breathing exercises can be very effective. Try inhaling slowly through your nose, holding for a few seconds, and exhaling slowly through your mouth. Repeat several times.",
       "Remember to take regular breaks throughout your day, even if it's just for a few minutes to stretch or step away from your work. Short breaks can make a big difference."
-    ]
+    ],
+    externalLink: "https://www.who.int/news-room/feature-stories/detail/stress",
+    externalLinkText: "Read about Stress on WHO"
   },
   {
     id: "importance-of-sleep",
     title: "The Value of Sleep for Mental Health",
     icon: Bed,
+    videoUrl: PLACEHOLDER_VIDEO_MEDIUM,
     content: [
       "Quality sleep is crucial for mental and emotional health. During sleep, your brain works to process emotions and memories, and a lack of sleep can affect your mood and resilience.",
       "Tips for better sleep: Try to maintain a consistent sleep schedule, create a relaxing bedtime routine, make sure your bedroom is dark and quiet, and avoid caffeine or heavy meals close to bedtime.",
       "If you consistently have trouble sleeping, it might be helpful to talk to a healthcare professional."
-    ]
+    ],
+    externalLink: "https://www.mentalhealth.org.uk/explore-mental-health/a-z-topics/sleep-and-mental-health",
+    externalLinkText: "Explore Sleep & Mental Health on MentalHealth.org.uk"
   },
   {
     id: "mindfulness-basics",
     title: "Mindfulness Basics",
     icon: Leaf,
+    videoUrl: PLACEHOLDER_VIDEO_LONG,
     content: [
       "Mindfulness is the practice of paying attention to the present moment without judgment. It can help reduce stress and increase self-awareness.",
       "A simple mindfulness exercise: Sit comfortably, close your eyes if you wish, and focus on your breath. Notice the sensation of air entering and leaving your body. If your mind wanders, gently bring your attention back to your breath.",
       "You can practice mindfulness anywhere, anytime – while walking, eating, or even washing dishes."
-    ]
+    ],
+    externalLink: "https://www.mindful.org/what-is-mindfulness/",
+    externalLinkText: "What is Mindfulness? on Mindful.org"
   },
   {
     id: "seeking-professional-help",
     title: "When to Seek Professional Help",
     icon: Users,
+    videoUrl: PLACEHOLDER_VIDEO_SHORT,
     content: [
       "While self-help strategies are valuable, sometimes professional support is needed. It's a sign of strength to seek help when you need it.",
       "Consider reaching out if: your feelings are intense and overwhelming, your symptoms are persistent and interfere with daily life, you're struggling to cope, or you have thoughts of harming yourself or others.",
       "You can talk to your doctor, a mental health professional (like a therapist or counselor), or look for resources through reputable mental health organizations (e.g., NAMI, Mental Health America)."
-    ]
+    ],
+    externalLink: "https://www.mhanational.org/finding-help",
+    externalLinkText: "Finding Help with Mental Health America"
   }
 ];
 
@@ -130,12 +153,8 @@ export interface GuidedMeditationTopic {
   icon?: LucideIcon;
   description: string;
   script: string[];
-  videoUrl?: string; // Now only videoUrl, audioUrl removed
+  videoUrl?: string; 
 }
-
-// Generic placeholder video URL. 
-// IMPORTANT: Replace these with actual, diverse video URLs relevant to each meditation's content and length.
-const PLACEHOLDER_VIDEO_URL = "https://www.w3schools.com/html/mov_bbb.mp4";
 
 export const GUIDED_MEDITATIONS: GuidedMeditationTopic[] = [
   {
@@ -143,7 +162,7 @@ export const GUIDED_MEDITATIONS: GuidedMeditationTopic[] = [
     title: "Breathing Meditation (5 Min)",
     icon: PlayCircle,
     description: "A short meditation to center yourself by focusing on your breath.",
-    videoUrl: PLACEHOLDER_VIDEO_URL, 
+    videoUrl: PLACEHOLDER_VIDEO_SHORT, // Short video for 5 min meditation
     script: [
       "Find a comfortable position, either sitting or lying down.",
       "Gently close your eyes, or soften your gaze if you prefer.",
@@ -165,7 +184,7 @@ export const GUIDED_MEDITATIONS: GuidedMeditationTopic[] = [
     title: "Body Scan Meditation (10 Min)",
     icon: PlayCircle,
     description: "A longer meditation to cultivate awareness of bodily sensations.",
-    videoUrl: PLACEHOLDER_VIDEO_URL, 
+    videoUrl: PLACEHOLDER_VIDEO_MEDIUM, // Medium video for 10 min meditation
     script: [
       "Begin by finding a comfortable position, ideally lying down on your back, or sitting if that's more comfortable for you. Let your arms rest by your sides, palms facing up or down.",
       "Allow your eyes to gently close, or maintain a soft, unfocused gaze.",
@@ -195,7 +214,7 @@ export const GUIDED_MEDITATIONS: GuidedMeditationTopic[] = [
     title: "Stress Relief Visualization (7 Min)",
     icon: PlayCircle,
     description: "Visualize a calming scene to release stress and tension.",
-    videoUrl: PLACEHOLDER_VIDEO_URL,
+    videoUrl: PLACEHOLDER_VIDEO_LONG, // Longer video for 7 min visualization
     script: [
       "Settle into a comfortable and quiet space where you won't be disturbed.",
       "Close your eyes gently and take three slow, deep breaths. With each exhale, imagine releasing any tension you're holding.",

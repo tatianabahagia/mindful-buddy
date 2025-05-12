@@ -16,7 +16,8 @@ import {
 } from "@/components/ui/accordion";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { EDUCATIONAL_CONTENT, type EducationalTopic } from "@/lib/constants";
-import { BookOpen } from "lucide-react";
+import { BookOpen, ExternalLink, PlayCircle } from "lucide-react";
+import { Button } from "@/components/ui/button";
 
 interface EducationalResourcesDialogProps {
   isOpen: boolean;
@@ -51,15 +52,48 @@ export function EducationalResourcesDialog({
                   </div>
                 </AccordionTrigger>
                 <AccordionContent className="text-sm text-muted-foreground leading-relaxed">
+                  {topic.videoUrl && (
+                    <div className="my-4 rounded-md overflow-hidden shadow-lg" data-ai-hint="education learning">
+                       <video
+                        key={topic.videoUrl}
+                        className="w-full aspect-video"
+                        controls
+                        preload="metadata"
+                      >
+                        <source src={topic.videoUrl} type="video/mp4" />
+                        Your browser does not support the video tag.
+                      </video>
+                    </div>
+                  )}
                   {topic.content.map((paragraph, index) => (
                     <p key={index} className={index < topic.content.length - 1 ? "mb-2" : ""}>
                       {paragraph}
                     </p>
                   ))}
+                  {topic.externalLink && (
+                    <Button
+                      variant="outline"
+                      size="sm"
+                      className="mt-4 w-full group"
+                      asChild
+                    >
+                      <a href={topic.externalLink} target="_blank" rel="noopener noreferrer">
+                        {topic.externalLinkText || "Learn More"}
+                        <ExternalLink className="ml-2 h-4 w-4 opacity-70 group-hover:opacity-100 transition-opacity" />
+                      </a>
+                    </Button>
+                  )}
                 </AccordionContent>
               </AccordionItem>
             ))}
           </Accordion>
+          {EDUCATIONAL_CONTENT.length === 0 && (
+            <div className="text-center py-10 text-muted-foreground">
+              <PlayCircle className="mx-auto h-12 w-12 text-primary/50 mb-2" />
+              <p className="text-lg font-medium">Educational Content Coming Soon!</p>
+              <p className="text-sm">We're working on bringing you helpful videos and resources.</p>
+            </div>
+          )}
         </ScrollArea>
       </DialogContent>
     </Dialog>
