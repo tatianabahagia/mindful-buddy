@@ -1,6 +1,5 @@
-# Mindful Buddy
-
-Mindful Buddy is an AI-powered chatbot designed to provide empathetic mental health support. It simulates a deeply mindful AI friend with the experience of a seasoned psychiatrist, offering features like mood and disorder selection, suicidal ideation detection, and integration of local mental health resources.
+# Bestfriend Buddy
+Bestfriend Buddy is an AI-powered chatbot designed to provide empathetic mental health support. It simulates a deeply mindful AI friend with the experience of a seasoned psychiatrist, offering features like mood and disorder selection, suicidal ideation detection, and integration of local mental health resources.
 
 ## Features
 
