@@ -52,6 +52,37 @@ export function GuidedMeditationDialog({
                 </AccordionTrigger>
                 <AccordionContent className="text-sm text-muted-foreground leading-relaxed">
                   <p className="mb-3 italic">{meditation.description}</p>
+                  
+                  {meditation.videoUrl && (
+                    <div className="my-4 rounded-md overflow-hidden shadow-lg" data-ai-hint="meditation nature">
+                      <video
+                        key={meditation.videoUrl} // Add key to re-render if URL changes
+                        className="w-full aspect-video"
+                        controls
+                        preload="metadata"
+                      >
+                        <source src={meditation.videoUrl} type="video/mp4" />
+                        Your browser does not support the video tag.
+                      </video>
+                    </div>
+                  )}
+
+                  {!meditation.videoUrl && meditation.audioUrl && (
+                    <div className="my-4" data-ai-hint="sound wave">
+                      <audio
+                        key={meditation.audioUrl} // Add key to re-render if URL changes
+                        className="w-full"
+                        controls
+                        preload="metadata"
+                        src={meditation.audioUrl}
+                      >
+                        Your browser does not support the audio element.
+                        {/* Note: Actual audio files need to be placed in the /public/audio directory */}
+                        {/* e.g., /public/audio/breathing-meditation.mp3 */}
+                      </audio>
+                    </div>
+                  )}
+
                   {meditation.script.map((paragraph, index) => (
                     <p key={index} className={index < meditation.script.length - 1 ? "mb-2.5" : ""}>
                       {paragraph}
